@@ -1,14 +1,4 @@
 %---------------------------------------------------------------------------%
-%-                                                                         -%
-%-                           LaTeX Template                                -%
-%-                                                                         -%
-%---------------------------------------------------------------------------%
-%- Copyright (C) Huangrui Mo <huangrui.mo@gmail.com> 
-%- This is free software: you can redistribute it and/or modify it
-%- under the terms of the GNU General Public License as published by
-%- the Free Software Foundation, either version 3 of the License, or
-%- (at your option) any later version.
-%---------------------------------------------------------------------------%
 %->> Document class declaration
 %---------------------------------------------------------------------------%
 \documentclass[twoside]{Style/ucasthesis}%
@@ -44,41 +34,36 @@
 %---------------------------------------------------------------------------%
 %->> Document inclusion
 %---------------------------------------------------------------------------%
-%\includeonly{Tex/Chap_1,...,Tex/Chap_N}% selected files compilation
+%\includeonly{tex/Chap_1,...,tex/Chap_N}% selected files compilation
 %---------------------------------------------------------------------------%
 %->> Document content
 %---------------------------------------------------------------------------%
 %-
 %-> Titlepage information
 %-
-\input{Tex/Frontinfo}%
+\input{tex/frontinfo}% 中英文封面信息
 \begin{document}
 %-
 %-> Frontmatter: title page, abstract, content list, symbol list, preface
 %-
 \frontmatter% initialize the environment
-\input{Tex/Frontmatter}% title page, abstract
+\input{tex/frontmatter}% 中英文摘要
 {% content list region
-\linespread{1.2}% local line space
+\linespread{1.2}% 局部行间距
 \intobmk*{\cleardoublepage}{\contentsname}% add link to bookmark
-\tableofcontents% content catalog
-\intobmk*{\cleardoublepage}{\listfigurename}% add link to bookmark
-\listoffigures% figure catalog
-\intobmk*{\cleardoublepage}{\listtablename}% add link to bookmark
-\listoftables% table catalog
+\tableofcontents% 章节目录
 }
-\input{Tex/Prematter}% symbol list, preface content
 %-
 %-> Mainmatter
 %-
 \mainmatter% initialize the environment
-\input{Tex/Mainmatter}% main content
+\input{tex/mainmatter}% 各章内容
 %-
 %-> Appendix
 %-
 \cleardoublepage%
 \appendix% initialize the environment
-\input{Tex/Appendix}% appendix content
+\input{tex/appendix}% 附录
 %-
 %-> Backmatter: bibliography, glossary, index
 %-
@@ -89,7 +74,6 @@
 }{%
     \printbibliography% bibliography
 }
-\input{Tex/Backmatter}% other information
+\input{tex/backmatter}% 论文发表和致谢
 \end{document}
 %---------------------------------------------------------------------------%
-
