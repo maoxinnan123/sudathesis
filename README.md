@@ -2,7 +2,7 @@
 
 ## 模板下载
 
-* 页面右边点击：**Clone or download -> Download Zip**
+* 页面右边点击：**Code -> Download ZIP**
 
 ## 模板简介
  
