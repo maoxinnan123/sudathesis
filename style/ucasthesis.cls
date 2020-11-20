@@ -1,14 +1,4 @@
 %---------------------------------------------------------------------------%
-%-                                                                         -%
-%-                           Document Class                                -%
-%-                                                                         -%
-%---------------------------------------------------------------------------%
-%- Copyright (C) Huangrui Mo <huangrui.mo@gmail.com> 
-%- This is free software: you can redistribute it and/or modify it
-%- under the terms of the GNU General Public License as published by
-%- the Free Software Foundation, either version 3 of the License, or
-%- (at your option) any later version.
-%---------------------------------------------------------------------------%
 %->> Identification
 %---------------------------------------------------------------------------%
 \NeedsTeXFormat{LaTeX2e}%
@@ -74,20 +64,6 @@
 \newcommand{\ucasifstreq}{\expandafter\ifstrequal\expandafter}% expansion control
 \newcommand{\ucasifstrbk}{\expandafter\ifblank\expandafter}% expansion control
 \RequirePackage{expl3}% LaTeX3 programming environment
-\ExplSyntaxOn
-\newcommand{\ucaslntotab}[2][1pt]{% convert lines into table lines
-    \seq_set_split:NnV \l_tmpa_seq {\\} {#2}
-    \clist_set_from_seq:NN \l_tmpa_clist \l_tmpa_seq
-    \clist_clear:N \l_tmpb_clist
-    \clist_map_inline:Nn \l_tmpa_clist
-      {%
-        \clist_put_right:Nn \l_tmpb_clist 
-          { \ulenhance[#1]{\ulextend{##1}} }
-      }
-    %\clist_show:N\l_tmpb_clist% show the content of comma list
-    \clist_use:Nn \l_tmpb_clist { \\ & }
-}
-\ExplSyntaxOff
 %---------------------------------------------------------------------------%
 %->> Load class configuration
 %---------------------------------------------------------------------------%
@@ -162,16 +138,14 @@
 %->> Titlepage
 %---------------------------------------------------------------------------%
 %-
-%-> Chinese item commands
+%-> 中文项目命令
 %-
-\def\ucas@value@ch@confidential{}
-\newcommand{\confidential}[1]{\def\ucas@value@ch@confidential{#1}}
-\def\ucas@value@ch@orderid{}
-\newcommand{\orderid}[1]{\def\ucas@value@ch@orderid{#1}}
-\def\ucas@value@ch@classid{}
-\newcommand{\classid}[1]{\def\ucas@value@ch@classid{#1}}
-\def\ucas@value@ch@udc{}
-\newcommand{\udc}[1]{\def\ucas@value@ch@udc{#1}}
+\def\ucas@value@ch@universitycode{}
+\newcommand{\universitycode}[1]{\def\ucas@value@ch@universitycode{#1}}
+\def\ucas@value@ch@sid{}
+\newcommand{\sid}[1]{\def\ucas@value@ch@sid{#1}}
+\def\ucas@value@ch@schooltitle{}
+\newcommand{\schooltitle}[2][]{\def\ucas@value@ch@schooltitle{\ucasifstrbk{#1}{\zihao{-2}\bfseries\sffamily #2}{\includegraphics[#1]{#2}}}}
 \def\ucas@value@ch@schoollogo{}
 \newcommand{\schoollogo}[2][]{\def\ucas@value@ch@schoollogo{\ucasifstrbk{#1}{\zihao{-2}\bfseries\sffamily #2}{\includegraphics[#1]{#2}}}}
 \def\ucas@value@ch@title{}
@@ -184,30 +158,18 @@
 \renewcommand{\author}[1]{\def\ucas@value@ch@author{#1}}
 \def\ucas@value@ch@advisor{}
 \newcommand{\advisor}[1]{\long\def\ucas@value@ch@advisor{#1}}
-\def\ucas@value@ch@advisors{}
-\newcommand{\advisors}[1]{\long\def\ucas@value@ch@advisors{#1}}
 \def\ucas@value@ch@degree{}
 \newcommand{\degree}[1]{\def\ucas@value@ch@degree{#1}}
-\def\ucas@value@ch@degreetype{}
-\newcommand{\degreetype}[1]{\def\ucas@value@ch@degreetype{#1}}
-\def\ucas@value@ch@subject{}
-\newcommand{\subject}[1]{\def\ucas@value@ch@subject{#1}}
 \def\ucas@value@ch@major{}
 \newcommand{\major}[1]{\def\ucas@value@ch@major{#1}}
+\def\ucas@value@ch@field{}
+\newcommand{\field}[1]{\def\ucas@value@ch@field{#1}}
 \def\ucas@value@ch@institute{}
 \newcommand{\institute}[1]{\long\def\ucas@value@ch@institute{#1}}
 \def\ucas@value@ch@school{}
 \newcommand{\school}[1]{\def\ucas@value@ch@school{#1}}
-\def\ucas@value@ch@orginization{}
-\newcommand{\orginization}[1]{\def\ucas@value@ch@orginization{#1}}
-\def\ucas@value@ch@completedate{}
-\newcommand{\completedate}[1]{\def\ucas@value@ch@completedate{#1}}
 \def\ucas@value@ch@submitdate{}
 \newcommand{\submitdate}[1]{\def\ucas@value@ch@submitdate{#1}}
-\def\ucas@value@ch@studydatefrom{}
-\newcommand{\studydatefrom}[1]{\def\ucas@value@ch@studydatefrom{#1}}
-\def\ucas@value@ch@studydateto{}
-\newcommand{\studydateto}[1]{\def\ucas@value@ch@studydateto{#1}}
 \def\ucas@value@ch@date{}
 \renewcommand{\date}[1]{\def\ucas@value@ch@date{#1}}
 %-
@@ -219,24 +181,10 @@
     \def\ucas@value@en@title{#2}
     %\def\ucas@value@en@titlemark{\MakeUppercase{#1}}}
     \def\ucas@value@en@titlemark{#1}}
-\def\ucas@value@en@author{}
-\newcommand{\AUTHOR}[1]{\def\ucas@value@en@author{#1}}
-\def\ucas@value@en@advisor{}
-\newcommand{\ADVISOR}[1]{\def\ucas@value@en@advisor{#1}}
 \def\ucas@value@en@degree{}
 \newcommand{\DEGREE}[1]{\edef\ucas@value@en@degree{\zap@space#1 \@empty}}% expand and remove space
-\def\ucas@value@en@degreetype{}
-\newcommand{\DEGREETYPE}[1]{\def\ucas@value@en@degreetype{#1}}
-\def\ucas@value@en@thesistype{}
-\newcommand{\THESISTYPE}[1]{\def\ucas@value@en@thesistype{#1}}
-\def\ucas@value@en@major{}
-\newcommand{\MAJOR}[1]{\def\ucas@value@en@major{#1}}
-\def\ucas@value@en@institute{}
-\newcommand{\INSTITUTE}[1]{\def\ucas@value@en@institute{#1}}
 \def\ucas@value@en@school{}
 \newcommand{\SCHOOL}[1]{\def\ucas@value@en@school{#1}}
-\def\ucas@value@en@date{}
-\newcommand{\DATE}[1]{\def\ucas@value@en@date{#1}}
 %-
 %-> Detect and adjust items
 %-
@@ -246,74 +194,70 @@
         \def\ucas@label@ch@author{\ucas@label@ch@author@bac}%
         \def\ucas@label@ch@major{\ucas@label@ch@major@bac}%
         \def\ucas@label@ch@institute{\ucas@label@ch@institute@bac}%
-        \def\ucas@value@en@thesistype{\ucas@value@en@thesistype@bac}%
-        \def\maketitle{\maketitle@xpdc}
-        \def\MAKETITLE{\MAKETITLE@xpdc}
     }{%
     \ucasifstreq{\ucas@value@en@degree}{Master}{%
         \def\ucas@label@ch@thesis{\ucas@label@ch@thesis@mas}%
         \def\ucas@label@ch@author{\ucas@label@ch@author@mas}%
         \def\ucas@label@ch@major{\ucas@label@ch@major@mas}%
         \def\ucas@label@ch@institute{\ucas@label@ch@institute@mas}%
-        \def\ucas@value@en@thesistype{\ucas@value@en@thesistype@mas}%
-        \def\maketitle{\maketitle@xpdc}
-        \def\MAKETITLE{\MAKETITLE@xpdc}
     }{%
     \ucasifstreq{\ucas@value@en@degree}{Doctor}{%
         \def\ucas@label@ch@thesis{\ucas@label@ch@thesis@doc}%
         \def\ucas@label@ch@author{\ucas@label@ch@author@doc}%
         \def\ucas@label@ch@major{\ucas@label@ch@major@doc}%
         \def\ucas@label@ch@institute{\ucas@label@ch@institute@doc}%
-        \def\ucas@value@en@thesistype{\ucas@value@en@thesistype@doc}%
-        \def\maketitle{\maketitle@xpdc}
-        \def\MAKETITLE{\MAKETITLE@xpdc}
-    }{%
-    \ucasifstreq{\ucas@value@en@degree}{Postdoctor}{%
-        \def\ucas@label@ch@thesis{\ucas@label@ch@thesis@pdc}%
-        \def\ucas@label@ch@author{\ucas@label@ch@author@pdc}%
-        \def\ucas@label@ch@major{\ucas@label@ch@major@pdc}%
-        \def\ucas@label@ch@institute{\ucas@label@ch@institute@pdc}%
-        \def\ucas@value@en@thesistype{\ucas@value@en@thesistype@pdc}%
-        \def\maketitle{\maketitle@pdc}
-        \def\MAKETITLE{\MAKETITLE@pdc}
     }{%
         \ClassWarning{ucasthesis}{Invalid value of '\string\DEGREE', please check the spelling}%
-    }}}}%
+    }}}%
 }
 %-
-%-> Define Chinese style
+%-> 封面
 %-
-\newcommand{\maketitle@xpdc}{%
+\def\maketitle{%
     \cleardoublepage
     \thispagestyle{empty}
     \begin{center}
         \linespread{1.6}
-        \zihao{4}\bfseries
+        \zihao{-4}\bfseries% 封面字体
 
-        \hfill{} \ucasifstrbk{\ucas@value@ch@confidential}{}{\ucas@label@ch@confidential \ulenhance{\ulextend[50pt]{\hspace*{-\ulhshift}\zihao{5}\ucas@value@ch@confidential}}}
+        \hfill{}\begin{tabular}{lc}% 封面右上角创建表格
+            \ucasifstrbk{\ucas@value@ch@universitycode}{}{\zihao{5}\makebox[4em][s]{\ucas@label@ch@universitycode}：&\ucas@value@ch@universitycode}\\
+            \ucasifstrbk{\ucas@value@ch@sid}{}{\zihao{5}\makebox[4em][s]{\ucas@label@ch@sid}：&\ucas@value@ch@sid}
+        \end{tabular}
 
         \vspace*{\stretch{4}}
 
-        {\ucas@value@ch@schoollogo}
+        {\ucas@value@ch@schooltitle}
+
+        {\zihao{3}\ucas@value@en@school}% 英文校名
 
         \vspace*{\stretch{2}}
 
         {\zihao{1}\bfseries\sffamily {\ucas@label@ch@thesis}}
 
+        {\zihao{-2}\bfseries\sffamily (\ucas@value@ch@degree\ucas@label@ch@degree)}
+
+        \vspace*{\stretch{2}}
+
+        {\ucas@value@ch@schoollogo}
+
         \vspace*{\stretch{3}}
 
-        {\zihao{-3}\bfseries\sffamily \ulenhance[1.5pt]{\ucas@value@ch@title}}
+        {\zihao{3}\bfseries\sffamily \ulenhance[0.5pt]{\ucas@value@ch@title}}
+
+        {\zihao{3}\bfseries \ulenhance[0.5pt]{\ucas@value@en@title}}
 
         \vspace*{\stretch{3}}
 
         \def\tabcolsep{1pt}
         \def\arraystretch{1.3}
         \begin{tabular}{lc}
-            \ucas@label@ch@author & \ulenhance[1.2pt]{\ulextend{\ucas@value@ch@author}}\\
-            \ucas@label@ch@advisor & \ucaslntotab[1.2pt]{\ucas@value@ch@advisor}\\
-            \ucas@label@ch@degree & \ulenhance[1.2pt]{\ulextend{\ucas@value@ch@degreetype\ucas@value@ch@degree}}\\
-            \ucas@label@ch@major & \ulenhance[1.2pt]{\ulextend{\ucas@value@ch@major}}\\
-            \ucas@label@ch@institute & \ucaslntotab[1.2pt]{\ucas@value@ch@institute}\\
+            \makebox[6em][s]{\ucas@label@ch@author} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@author}}\\
+            \makebox[6em][s]{\ucas@label@ch@advisor} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@advisor}}\\
+            \makebox[6em][s]{\ucas@label@ch@major} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@major}}\\
+            \makebox[6em][s]{\ucas@label@ch@field} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@field}}\\
+            \makebox[6em][s]{\ucas@label@ch@institute} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@institute}}\\
+            \makebox[6em][s]{\ucas@label@ch@submitdate} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@submitdate}}\\
         \end{tabular}
 
         \vspace*{\stretch{4}}
@@ -348,197 +292,6 @@
         \hypersetup{% set hyperlinks
             hidelinks,% remove link color and border
         }
-    \fi
-}
-\newcommand{\maketitle@pdc}{%
-    \cleardoublepage
-    \thispagestyle{empty}
-    \begin{center}
-
-        \vspace*{30pt}
-
-        \linespread{2.0}
-        \zihao{4}\bfseries
-
-        \makebox[3.0em][s]{\ucas@label@ch@classid} \ulenhance{\ulextend[6em]{\zihao{5}\ucas@value@ch@classid}} \hfill{} \ucas@label@ch@confidential \ulenhance{\ulextend[6em]{\zihao{5}\ucas@value@ch@confidential}}
-
-        \makebox[3.0em][s]{\ucas@label@ch@udc} \ulenhance{\ulextend[6em]{\zihao{5}\ucas@value@ch@udc}} \hfill{} \ucas@label@ch@orderid \ulenhance{\ulextend[6em]{\zihao{5}\ucas@value@ch@orderid}}
-
-        \vspace*{\stretch{6}}
-
-        {\ziju{1.5}\ucas@value@ch@schoollogo}
-
-        \vspace*{\stretch{1}}
-
-        {\zihao{-2}\bfseries\sffamily{\ziju{0.5} \ucas@label@ch@thesis}}
-
-        \vspace*{\stretch{3}}
-
-        {\zihao{-3}\bfseries\sffamily \ulenhance[1.5pt]{\ucas@value@ch@title}}
-
-        \vspace*{\stretch{2.5}}
-
-        \ucas@value@ch@author
-
-        \vspace*{\stretch{2.5}}
-
-        \def\tabcolsep{1pt}
-        \def\arraystretch{1.3}
-        \begin{tabular}{l@{\quad}c}
-            \ucas@label@ch@completedate & \ulenhance{\ulextend[200pt]{\ucas@value@ch@completedate}}\\
-            \ucas@label@ch@submitdate & \ulenhance{\ulextend[200pt]{\ucas@value@ch@submitdate}}\\
-        \end{tabular}
-
-        \vspace*{\stretch{2}}
-
-        \ucas@value@ch@institute
-
-        \ucas@value@ch@date
-
-        \vspace*{\stretch{4}}
-    \end{center}
-    \clearpage
-    \if@twoside
-      \thispagestyle{empty}
-      \cleardoublepage[empty]
-    \fi
-    \ifucas@print%
-        \hypersetup{% set hyperlinks
-            hidelinks,% remove link color and border
-        }
-    \fi
-}
-%-
-%-> Define English style
-%-
-\newcommand{\MAKETITLE@xpdc}{%
-    \cleardoublepage
-    \thispagestyle{empty}
-    \begin{center}
-        \linespread{1.6}
-        \zihao{4}\bfseries
-
-        \vspace*{50pt}
-
-        {\zihao{-3}\bfseries \ulenhance[1.5pt]{\ucas@value@en@title}}
-
-        \vspace*{\stretch{3}}
-
-        {\ucas@label@en@statement}
-
-        {By}
-
-        {\ucas@value@en@author}
-
-        {\ucas@value@en@advisor}
-
-        \vspace*{\stretch{3}}
-
-        {\ucas@value@en@institute}
-
-        \vspace*{\stretch{1}}
-
-        {\ucas@value@en@date}
-
-        \vspace*{\stretch{3}}
-    \end{center}
-    \clearpage
-    \if@twoside
-      \thispagestyle{empty}
-      \cleardoublepage[empty]
-    \fi
-}
-\newcommand{\MAKETITLE@pdc}{%
-    \cleardoublepage
-    \thispagestyle{empty}
-    \begin{center}
-        \linespread{2.0}
-        \zihao{4}\bfseries
-
-        \vspace*{50pt}
-
-        {\zihao{3}\bfseries \ucas@value@ch@title}
-
-        \vspace*{\stretch{3}}
-
-        {\zihao{-3}\bfseries \ucas@value@en@title}
-
-        \vspace*{\stretch{3}}
-
-        \def\tabcolsep{1pt}
-        \def\arraystretch{1.3}
-        \begin{tabular}{l@{\quad}l}
-            \makebox[11em][s]{\ucas@label@ch@author} & \ucas@value@ch@author\\
-            \makebox[11em][s]{\ucas@label@ch@subject} & \ucas@value@ch@subject\\
-            \makebox[11em][s]{\ucas@label@ch@major} & \ucas@value@ch@major\\
-        \end{tabular}
-
-        \vspace*{\stretch{3}}
-
-        \ucas@label@ch@studydatefrom \quad \ucas@value@ch@studydatefrom
-
-        \ucas@label@ch@studydateto \quad \ucas@value@ch@studydateto
-
-        \vspace*{\stretch{3}}
-
-        \ucas@value@ch@orginization
-
-        \ucas@value@ch@date
-
-        \vspace*{\stretch{3}}
-    \end{center}
-    \clearpage
-    \if@twoside
-      \thispagestyle{empty}
-      \cleardoublepage[empty]
-    \fi
-}
-%---------------------------------------------------------------------------%
-%->> Author's declaration
-%---------------------------------------------------------------------------%
-\newcommand{\makedeclaration}{%
-    \cleardoublepage
-    \thispagestyle{empty}
-    {
-        \linespread{1.6}
-        \zihao{-4}
-
-        \vspace*{2ex}
-
-        \begin{center}
-            {\zihao{4}\bfseries\sffamily \ucas@label@ch@declare@creativity}
-        \end{center}
-
-        {\ucas@value@ch@declare@creativity}
-
-        \vspace*{3ex}
-
-        {\hfill{} {\ucas@label@ch@declare@author \hspace*{14em}}}
-
-        {\hfill{} {\ucas@label@ch@declare@date \hspace*{14em}}}
-
-        \vspace*{6ex}
-
-        \begin{center}
-            {\zihao{4}\bfseries\sffamily \ucas@label@ch@declare@rights}
-        \end{center}
-
-        {\ucas@value@ch@declare@rights}
-
-        {\ucas@value@ch@declare@rule}
-
-        \vspace*{3ex}
-
-        {\hfill{} {\ucas@label@ch@declare@author \hspace*{10em} \ucas@label@ch@declare@advisor \hspace*{9em}}}
-
-        {\hfill{} {\ucas@label@ch@declare@date \hspace*{10em} \ucas@label@ch@declare@date \hspace*{9em}}}
-
-        \vspace*{3ex}
-    }
-    \clearpage
-    \if@twoside
-        \thispagestyle{empty}
-        \cleardoublepage[empty]
     \fi
 }
 %---------------------------------------------------------------------------%
@@ -609,7 +362,7 @@
         format = \linespread{1.0}\zihao{4}\bfseries\sffamily\centering,
         nameformat = {},
         titleformat = {},
-        number = \arabic{chapter},
+        number = \zhnum{chapter},
         numberformat = \rmfamily,
         aftername = \quad,
         beforeskip = {7pt},
@@ -738,4 +491,3 @@
 \renewcommand*\l@table{\@dottedtocline{1}{1em}{1.8em}}
 %---------------------------------------------------------------------------%
 \endinput
-
