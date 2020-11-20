@@ -6,7 +6,7 @@
 \@iflatexlater{2017/01/01}{}{%
     \ClassError{sudathesis}{TeXLive/MikTex >= 2017 is required ...}{}%
 }
-\ProvidesClass{sudathesis}[2014/10/01 v1.0 LaTeX document class]%
+\ProvidesClass{sudathesis}[2020/11/20 v1.0 LaTeX document class]%
 %---------------------------------------------------------------------------%
 %->> Declare options
 %---------------------------------------------------------------------------%
