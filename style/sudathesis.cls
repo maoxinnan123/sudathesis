@@ -4,9 +4,9 @@
 \NeedsTeXFormat{LaTeX2e}%
 \newcommand*\@iflatexlater{\@ifl@t@r\fmtversion}%
 \@iflatexlater{2017/01/01}{}{%
-    \ClassError{ucasthesis}{TeXLive/MikTex >= 2017 is required ...}{}%
+    \ClassError{sudathesis}{TeXLive/MikTex >= 2017 is required ...}{}%
 }
-\ProvidesClass{ucasthesis}[2014/10/01 v1.0 LaTeX document class]%
+\ProvidesClass{sudathesis}[2014/10/01 v1.0 LaTeX document class]%
 %---------------------------------------------------------------------------%
 %->> Declare options
 %---------------------------------------------------------------------------%
@@ -19,25 +19,25 @@
 \DeclareOption{twoside}{%
     \PassOptionsToClass{twoside}{ctexbook}%
 }
-\newif\ifucas@print \ucas@printfalse
+\newif\ifsuda@print \suda@printfalse
 \DeclareOption{print}{%
     \PassOptionsToClass{twoside}{ctexbook}%
-    \ucas@printtrue%
+    \suda@printtrue%
 }
 %-
 %-> Language
 %-
-\newif\ifucas@plain \ucas@plainfalse
+\newif\ifsuda@plain \suda@plainfalse
 \DeclareOption{scheme=plain}{% enable plain writing style
     \PassOptionsToClass{scheme=plain}{ctexbook}%
-    \ucas@plaintrue%
+    \suda@plaintrue%
 }
 %-
 %-> Draft version info
 %-
-\newif\ifucas@versioninfo \ucas@versioninfofalse
+\newif\ifsuda@versioninfo \suda@versioninfofalse
 \DeclareOption{draftversion}{%
-    \ucas@versioninfotrue%
+    \suda@versioninfotrue%
 }
 %-
 %-> Handle non-implemented options
@@ -54,22 +54,22 @@
 %---------------------------------------------------------------------------%
 \LoadClass[UTF8,a4paper,zihao=-4]{ctexbook}%
 \@ifclasslater{ctexbook}{2017/01/01}{}{%
-    \ClassError{ucasthesis}{ctex >= 2017/01/01 is required ...}{}%
+    \ClassError{sudathesis}{ctex >= 2017/01/01 is required ...}{}%
 }
 %---------------------------------------------------------------------------%
 %->> Required packages
 %---------------------------------------------------------------------------%
 \RequirePackage{ifxetex}% LaTeX engine detection
 \RequirePackage{etoolbox}% a toolbox of programming facilities
-\newcommand{\ucasifstreq}{\expandafter\ifstrequal\expandafter}% expansion control
-\newcommand{\ucasifstrbk}{\expandafter\ifblank\expandafter}% expansion control
+\newcommand{\sudaifstreq}{\expandafter\ifstrequal\expandafter}% expansion control
+\newcommand{\sudaifstrbk}{\expandafter\ifblank\expandafter}% expansion control
 \RequirePackage{expl3}% LaTeX3 programming environment
 %---------------------------------------------------------------------------%
 %->> Load class configuration
 %---------------------------------------------------------------------------%
 \AtEndOfPackage{% class cfg loaded after package to make preamble commands take effect
     \makeatletter
-    \InputIfFileExists{Style/ucasthesis.cfg}{}{}
+    \InputIfFileExists{Style/sudathesis.cfg}{}{}
     \makeatother
 }
 %---------------------------------------------------------------------------%
@@ -85,7 +85,7 @@
 %- assuming A4 paper (210mm x 297mm)
 \setlength{\textwidth}{146.6mm}% set required text width first
 \setlength{\hoffset}{0mm}% set horizontal offset
-\ifucas@print% if print layout enabled
+\ifsuda@print% if print layout enabled
     \setlength{\oddsidemargin}{12.6mm}% binding side margin
     \setlength{\evensidemargin}{0mm}% ensure uniform binding side width for printing
 \else
@@ -140,74 +140,74 @@
 %-
 %-> 中文项目命令
 %-
-\def\ucas@value@ch@universitycode{}
-\newcommand{\universitycode}[1]{\def\ucas@value@ch@universitycode{#1}}
-\def\ucas@value@ch@sid{}
-\newcommand{\sid}[1]{\def\ucas@value@ch@sid{#1}}
-\def\ucas@value@ch@schooltitle{}
-\newcommand{\schooltitle}[2][]{\def\ucas@value@ch@schooltitle{\ucasifstrbk{#1}{\zihao{-2}\bfseries\sffamily #2}{\includegraphics[#1]{#2}}}}
-\def\ucas@value@ch@schoollogo{}
-\newcommand{\schoollogo}[2][]{\def\ucas@value@ch@schoollogo{\ucasifstrbk{#1}{\zihao{-2}\bfseries\sffamily #2}{\includegraphics[#1]{#2}}}}
-\def\ucas@value@ch@title{}
-\def\ucas@value@ch@titlemark{}
-\renewcommand{\title}[2][\ucas@value@ch@title]{%
-    \def\ucas@value@ch@title{#2}
-    %\def\ucas@value@ch@titlemark{\MakeUppercase{#1}}}
-    \def\ucas@value@ch@titlemark{#1}}
-\def\ucas@value@ch@author{}
-\renewcommand{\author}[1]{\def\ucas@value@ch@author{#1}}
-\def\ucas@value@ch@advisor{}
-\newcommand{\advisor}[1]{\long\def\ucas@value@ch@advisor{#1}}
-\def\ucas@value@ch@degree{}
-\newcommand{\degree}[1]{\def\ucas@value@ch@degree{#1}}
-\def\ucas@value@ch@major{}
-\newcommand{\major}[1]{\def\ucas@value@ch@major{#1}}
-\def\ucas@value@ch@field{}
-\newcommand{\field}[1]{\def\ucas@value@ch@field{#1}}
-\def\ucas@value@ch@institute{}
-\newcommand{\institute}[1]{\long\def\ucas@value@ch@institute{#1}}
-\def\ucas@value@ch@school{}
-\newcommand{\school}[1]{\def\ucas@value@ch@school{#1}}
-\def\ucas@value@ch@submitdate{}
-\newcommand{\submitdate}[1]{\def\ucas@value@ch@submitdate{#1}}
-\def\ucas@value@ch@date{}
-\renewcommand{\date}[1]{\def\ucas@value@ch@date{#1}}
+\def\suda@value@ch@universitycode{}
+\newcommand{\universitycode}[1]{\def\suda@value@ch@universitycode{#1}}
+\def\suda@value@ch@sid{}
+\newcommand{\sid}[1]{\def\suda@value@ch@sid{#1}}
+\def\suda@value@ch@schooltitle{}
+\newcommand{\schooltitle}[2][]{\def\suda@value@ch@schooltitle{\sudaifstrbk{#1}{\zihao{-2}\bfseries\sffamily #2}{\includegraphics[#1]{#2}}}}
+\def\suda@value@ch@schoollogo{}
+\newcommand{\schoollogo}[2][]{\def\suda@value@ch@schoollogo{\sudaifstrbk{#1}{\zihao{-2}\bfseries\sffamily #2}{\includegraphics[#1]{#2}}}}
+\def\suda@value@ch@title{}
+\def\suda@value@ch@titlemark{}
+\renewcommand{\title}[2][\suda@value@ch@title]{%
+    \def\suda@value@ch@title{#2}
+    %\def\suda@value@ch@titlemark{\MakeUppercase{#1}}}
+    \def\suda@value@ch@titlemark{#1}}
+\def\suda@value@ch@author{}
+\renewcommand{\author}[1]{\def\suda@value@ch@author{#1}}
+\def\suda@value@ch@advisor{}
+\newcommand{\advisor}[1]{\long\def\suda@value@ch@advisor{#1}}
+\def\suda@value@ch@degree{}
+\newcommand{\degree}[1]{\def\suda@value@ch@degree{#1}}
+\def\suda@value@ch@major{}
+\newcommand{\major}[1]{\def\suda@value@ch@major{#1}}
+\def\suda@value@ch@field{}
+\newcommand{\field}[1]{\def\suda@value@ch@field{#1}}
+\def\suda@value@ch@institute{}
+\newcommand{\institute}[1]{\long\def\suda@value@ch@institute{#1}}
+\def\suda@value@ch@school{}
+\newcommand{\school}[1]{\def\suda@value@ch@school{#1}}
+\def\suda@value@ch@submitdate{}
+\newcommand{\submitdate}[1]{\def\suda@value@ch@submitdate{#1}}
+\def\suda@value@ch@date{}
+\renewcommand{\date}[1]{\def\suda@value@ch@date{#1}}
 %-
 %-> English item commands
 %-
-\def\ucas@value@en@title{}
-\def\ucas@value@en@titlemark{}
-\newcommand{\TITLE}[2][\ucas@value@en@title]{%
-    \def\ucas@value@en@title{#2}
-    %\def\ucas@value@en@titlemark{\MakeUppercase{#1}}}
-    \def\ucas@value@en@titlemark{#1}}
-\def\ucas@value@en@degree{}
-\newcommand{\DEGREE}[1]{\edef\ucas@value@en@degree{\zap@space#1 \@empty}}% expand and remove space
-\def\ucas@value@en@school{}
-\newcommand{\SCHOOL}[1]{\def\ucas@value@en@school{#1}}
+\def\suda@value@en@title{}
+\def\suda@value@en@titlemark{}
+\newcommand{\TITLE}[2][\suda@value@en@title]{%
+    \def\suda@value@en@title{#2}
+    %\def\suda@value@en@titlemark{\MakeUppercase{#1}}}
+    \def\suda@value@en@titlemark{#1}}
+\def\suda@value@en@degree{}
+\newcommand{\DEGREE}[1]{\edef\suda@value@en@degree{\zap@space#1 \@empty}}% expand and remove space
+\def\suda@value@en@school{}
+\newcommand{\SCHOOL}[1]{\def\suda@value@en@school{#1}}
 %-
 %-> Detect and adjust items
 %-
 \AtEndPreamble{%
-    \ucasifstreq{\ucas@value@en@degree}{Bachelor}{%
-        \def\ucas@label@ch@thesis{\ucas@label@ch@thesis@bac}%
-        \def\ucas@label@ch@author{\ucas@label@ch@author@bac}%
-        \def\ucas@label@ch@major{\ucas@label@ch@major@bac}%
-        \def\ucas@label@ch@institute{\ucas@label@ch@institute@bac}%
+    \sudaifstreq{\suda@value@en@degree}{Bachelor}{%
+        \def\suda@label@ch@thesis{\suda@label@ch@thesis@bac}%
+        \def\suda@label@ch@author{\suda@label@ch@author@bac}%
+        \def\suda@label@ch@major{\suda@label@ch@major@bac}%
+        \def\suda@label@ch@institute{\suda@label@ch@institute@bac}%
     }{%
-    \ucasifstreq{\ucas@value@en@degree}{Master}{%
-        \def\ucas@label@ch@thesis{\ucas@label@ch@thesis@mas}%
-        \def\ucas@label@ch@author{\ucas@label@ch@author@mas}%
-        \def\ucas@label@ch@major{\ucas@label@ch@major@mas}%
-        \def\ucas@label@ch@institute{\ucas@label@ch@institute@mas}%
+    \sudaifstreq{\suda@value@en@degree}{Master}{%
+        \def\suda@label@ch@thesis{\suda@label@ch@thesis@mas}%
+        \def\suda@label@ch@author{\suda@label@ch@author@mas}%
+        \def\suda@label@ch@major{\suda@label@ch@major@mas}%
+        \def\suda@label@ch@institute{\suda@label@ch@institute@mas}%
     }{%
-    \ucasifstreq{\ucas@value@en@degree}{Doctor}{%
-        \def\ucas@label@ch@thesis{\ucas@label@ch@thesis@doc}%
-        \def\ucas@label@ch@author{\ucas@label@ch@author@doc}%
-        \def\ucas@label@ch@major{\ucas@label@ch@major@doc}%
-        \def\ucas@label@ch@institute{\ucas@label@ch@institute@doc}%
+    \sudaifstreq{\suda@value@en@degree}{Doctor}{%
+        \def\suda@label@ch@thesis{\suda@label@ch@thesis@doc}%
+        \def\suda@label@ch@author{\suda@label@ch@author@doc}%
+        \def\suda@label@ch@major{\suda@label@ch@major@doc}%
+        \def\suda@label@ch@institute{\suda@label@ch@institute@doc}%
     }{%
-        \ClassWarning{ucasthesis}{Invalid value of '\string\DEGREE', please check the spelling}%
+        \ClassWarning{sudathesis}{Invalid value of '\string\DEGREE', please check the spelling}%
     }}}%
 }
 %-
@@ -221,55 +221,55 @@
         \zihao{-4}\bfseries% 封面字体
 
         \hfill{}\begin{tabular}{lc}% 封面右上角创建表格
-            \ucasifstrbk{\ucas@value@ch@universitycode}{}{\zihao{5}\makebox[4em][s]{\ucas@label@ch@universitycode}：&\ucas@value@ch@universitycode}\\
-            \ucasifstrbk{\ucas@value@ch@sid}{}{\zihao{5}\makebox[4em][s]{\ucas@label@ch@sid}：&\ucas@value@ch@sid}
+            \sudaifstrbk{\suda@value@ch@universitycode}{}{\zihao{5}\makebox[4em][s]{\suda@label@ch@universitycode}：&\suda@value@ch@universitycode}\\
+            \sudaifstrbk{\suda@value@ch@sid}{}{\zihao{5}\makebox[4em][s]{\suda@label@ch@sid}：&\suda@value@ch@sid}
         \end{tabular}
 
         \vspace*{\stretch{4}}
 
-        {\ucas@value@ch@schooltitle}
+        {\suda@value@ch@schooltitle}
 
-        {\zihao{3}\ucas@value@en@school}% 英文校名
-
-        \vspace*{\stretch{2}}
-
-        {\zihao{1}\bfseries\sffamily {\ucas@label@ch@thesis}}
-
-        {\zihao{-2}\bfseries\sffamily (\ucas@value@ch@degree\ucas@label@ch@degree)}
+        {\zihao{3}\suda@value@en@school}% 英文校名
 
         \vspace*{\stretch{2}}
 
-        {\ucas@value@ch@schoollogo}
+        {\zihao{1}\bfseries\sffamily {\suda@label@ch@thesis}}
+
+        {\zihao{-2}\bfseries\sffamily (\suda@value@ch@degree\suda@label@ch@degree)}
+
+        \vspace*{\stretch{2}}
+
+        {\suda@value@ch@schoollogo}
 
         \vspace*{\stretch{3}}
 
-        {\zihao{3}\bfseries\sffamily \ulenhance[0.5pt]{\ucas@value@ch@title}}
+        {\zihao{3}\bfseries\sffamily \ulenhance[0.5pt]{\suda@value@ch@title}}
 
-        {\zihao{3}\bfseries \ulenhance[0.5pt]{\ucas@value@en@title}}
+        {\zihao{3}\bfseries \ulenhance[0.5pt]{\suda@value@en@title}}
 
         \vspace*{\stretch{3}}
 
         \def\tabcolsep{1pt}
         \def\arraystretch{1.3}
         \begin{tabular}{lc}
-            \makebox[6em][s]{\ucas@label@ch@author} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@author}}\\
-            \makebox[6em][s]{\ucas@label@ch@advisor} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@advisor}}\\
-            \makebox[6em][s]{\ucas@label@ch@major} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@major}}\\
-            \makebox[6em][s]{\ucas@label@ch@field} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@field}}\\
-            \makebox[6em][s]{\ucas@label@ch@institute} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@institute}}\\
-            \makebox[6em][s]{\ucas@label@ch@submitdate} & \ulenhance[0.5pt]{\ulextend{\ucas@value@ch@submitdate}}\\
+            \makebox[6em][s]{\suda@label@ch@author} & \ulenhance[0.5pt]{\ulextend{\suda@value@ch@author}}\\
+            \makebox[6em][s]{\suda@label@ch@advisor} & \ulenhance[0.5pt]{\ulextend{\suda@value@ch@advisor}}\\
+            \makebox[6em][s]{\suda@label@ch@major} & \ulenhance[0.5pt]{\ulextend{\suda@value@ch@major}}\\
+            \makebox[6em][s]{\suda@label@ch@field} & \ulenhance[0.5pt]{\ulextend{\suda@value@ch@field}}\\
+            \makebox[6em][s]{\suda@label@ch@institute} & \ulenhance[0.5pt]{\ulextend{\suda@value@ch@institute}}\\
+            \makebox[6em][s]{\suda@label@ch@submitdate} & \ulenhance[0.5pt]{\ulextend{\suda@value@ch@submitdate}}\\
         \end{tabular}
 
         \vspace*{\stretch{4}}
 
-        {\ucas@value@ch@date}
+        {\suda@value@ch@date}
 
         \vspace*{\stretch{4}}
     \end{center}
     \clearpage
     \if@twoside
         \thispagestyle{empty}
-        \ifucas@versioninfo
+        \ifsuda@versioninfo
             \vspace*{\stretch{1}}
             \begin{footnotesize}
                 \noindent
@@ -278,7 +278,7 @@
         \fi
         \cleardoublepage[empty]
     \else
-        \ifucas@versioninfo
+        \ifsuda@versioninfo
             \thispagestyle{empty}
             \vspace*{\stretch{1}}
             \begin{footnotesize}
@@ -288,7 +288,7 @@
             \cleardoublepage[empty]
         \fi
     \fi
-    \ifucas@print%
+    \ifsuda@print%
         \hypersetup{% set hyperlinks
             hidelinks,% remove link color and border
         }
@@ -300,58 +300,58 @@
 %- define chinese keywords
 \newcommand{\keywords}[1]{%
     \vspace{\baselineskip}
-    \noindent {\bfseries \ucas@label@ch@keywords} #1}
+    \noindent {\bfseries \suda@label@ch@keywords} #1}
 %- define engish keywords
 \newcommand{\KEYWORDS}[1]{%
     \vspace{\baselineskip}
-    \noindent {\bfseries \ucas@label@en@keywords} #1}
+    \noindent {\bfseries \suda@label@en@keywords} #1}
 %---------------------------------------------------------------------------%
 %->> Structure elements
 %---------------------------------------------------------------------------%
-\ifucas@plain%
-    \def\contentsname{\ucas@label@en@tocname}
-    \def\listfigurename{\ucas@label@en@lsfigname}
-    \def\listtablename{\ucas@label@en@lstabname}
-    \def\bibname{\ucas@label@en@bibname}
-    \def\refname{\ucas@label@en@bibname}
-    \def\algname{\ucas@label@en@algname}
-    \def\bibetal{\ucas@label@en@bibetal}
-    \def\biband{\ucas@label@en@biband}
-    \def\axiomname{\ucas@label@en@axiomname}
-    \def\theoremname{\ucas@label@en@theoremname}
-    \def\lemmaname{\ucas@label@en@lemmaname}
-    \def\corollaryname{\ucas@label@en@corollaryname}
-    \def\assertionname{\ucas@label@en@assertionname}
-    \def\propositionname{\ucas@label@en@propositionname}
-    \def\conjecturename{\ucas@label@en@conjecturename}
-    \def\definitionname{\ucas@label@en@definitionname}
-    \def\examplename{\ucas@label@en@examplename}
-    \def\remarkname{\ucas@label@en@remarkname}
-    \def\proofname{\ucas@label@en@proofname}
-    \def\@title{\ucas@value@en@titlemark}
-    \def\@author{\ucas@value@en@author}
+\ifsuda@plain%
+    \def\contentsname{\suda@label@en@tocname}
+    \def\listfigurename{\suda@label@en@lsfigname}
+    \def\listtablename{\suda@label@en@lstabname}
+    \def\bibname{\suda@label@en@bibname}
+    \def\refname{\suda@label@en@bibname}
+    \def\algname{\suda@label@en@algname}
+    \def\bibetal{\suda@label@en@bibetal}
+    \def\biband{\suda@label@en@biband}
+    \def\axiomname{\suda@label@en@axiomname}
+    \def\theoremname{\suda@label@en@theoremname}
+    \def\lemmaname{\suda@label@en@lemmaname}
+    \def\corollaryname{\suda@label@en@corollaryname}
+    \def\assertionname{\suda@label@en@assertionname}
+    \def\propositionname{\suda@label@en@propositionname}
+    \def\conjecturename{\suda@label@en@conjecturename}
+    \def\definitionname{\suda@label@en@definitionname}
+    \def\examplename{\suda@label@en@examplename}
+    \def\remarkname{\suda@label@en@remarkname}
+    \def\proofname{\suda@label@en@proofname}
+    \def\@title{\suda@value@en@titlemark}
+    \def\@author{\suda@value@en@author}
 \else
-    \def\contentsname{\ucas@label@ch@tocname}
-    \def\listfigurename{\ucas@label@ch@lsfigname}
-    \def\listtablename{\ucas@label@ch@lstabname}
-    \def\algname{\ucas@label@ch@algname}
-    \def\bibname{\ucas@label@ch@bibname}
-    \def\refname{\ucas@label@ch@bibname}
-    \def\bibetal{\ucas@label@ch@bibetal}
-    \def\biband{\ucas@label@ch@biband}
-    \def\axiomname{\ucas@label@ch@axiomname}
-    \def\theoremname{\ucas@label@ch@theoremname}
-    \def\lemmaname{\ucas@label@ch@lemmaname}
-    \def\corollaryname{\ucas@label@ch@corollaryname}
-    \def\assertionname{\ucas@label@ch@assertionname}
-    \def\propositionname{\ucas@label@ch@propositionname}
-    \def\conjecturename{\ucas@label@ch@conjecturename}
-    \def\definitionname{\ucas@label@ch@definitionname}
-    \def\examplename{\ucas@label@ch@examplename}
-    \def\remarkname{\ucas@label@ch@remarkname}
-    \def\proofname{\ucas@label@ch@proofname}
-    \def\@title{\ucas@value@ch@titlemark}
-    \def\@author{\ucas@value@ch@author}
+    \def\contentsname{\suda@label@ch@tocname}
+    \def\listfigurename{\suda@label@ch@lsfigname}
+    \def\listtablename{\suda@label@ch@lstabname}
+    \def\algname{\suda@label@ch@algname}
+    \def\bibname{\suda@label@ch@bibname}
+    \def\refname{\suda@label@ch@bibname}
+    \def\bibetal{\suda@label@ch@bibetal}
+    \def\biband{\suda@label@ch@biband}
+    \def\axiomname{\suda@label@ch@axiomname}
+    \def\theoremname{\suda@label@ch@theoremname}
+    \def\lemmaname{\suda@label@ch@lemmaname}
+    \def\corollaryname{\suda@label@ch@corollaryname}
+    \def\assertionname{\suda@label@ch@assertionname}
+    \def\propositionname{\suda@label@ch@propositionname}
+    \def\conjecturename{\suda@label@ch@conjecturename}
+    \def\definitionname{\suda@label@ch@definitionname}
+    \def\examplename{\suda@label@ch@examplename}
+    \def\remarkname{\suda@label@ch@remarkname}
+    \def\proofname{\suda@label@ch@proofname}
+    \def\@title{\suda@value@ch@titlemark}
+    \def\@author{\suda@value@ch@author}
 \fi
 %---------------------------------------------------------------------------%
 %->> Structure layout
