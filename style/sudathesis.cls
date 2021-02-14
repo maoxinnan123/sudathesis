@@ -229,13 +229,11 @@
 
         {\suda@value@ch@schooltitle}
 
-        {\zihao{3}\suda@value@en@school}% 英文校名
-
         \vspace*{\stretch{2}}
 
         {\zihao{1}\bfseries\sffamily {\suda@label@ch@thesis}}
 
-        {\zihao{-2}\bfseries\sffamily (\suda@value@ch@degree\suda@label@ch@degree)}
+        {\zihao{-2}\bfseries\sffamily （\suda@value@ch@degree\suda@label@ch@degree）}
 
         \vspace*{\stretch{2}}
 
